@@ -1995,8 +1995,10 @@ def retcode(container, cmd):
         salt '*' docker.retcode <container id> 'ls -l /etc'
     '''
     status = base_status.copy()
-    return _run_wrapper(
+    val = _run_wrapper(
         status, container, 'cmd.retcode', cmd)
+    assert isinstance(val, int), val
+    return val
 
 
 def get_container_root(container):
